@@ -1,12 +1,13 @@
 ;Hello world example
+(ns ChapterOne.HelloWorld)
 
-(ns ChapterOne.HelloWorld
-  (:use clojure.test))
+;creates a reference and binds to name visitors
+(def visitors (ref #{}))
 
 (defn hello
   [name]
   (dosync
-    (let [past-visitor (@visitors username)]
+    (let [past-visitor (@visitors name)]
       (if past-visitor
         (str "Welcome back, " name)
         (do
@@ -14,4 +15,7 @@
           (str "Hello, " name)))))
   )
 
-
+;ChapterOne.HelloWorld=> (hello "Kev")
+;"Hello, Kev"
+;ChapterOne.HelloWorld=> (hello "Kev")
+;"Welcome back, Kev"
